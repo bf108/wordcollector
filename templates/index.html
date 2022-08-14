@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
+
+<div class="content">
+  <h1>URL Word Counter</h1>
+  <div class="'container">
+    <form method="POST">
+      <div class="form-group">
+        <label for="exampleInputUrl">Input URL</label>
+        <input
+          type="text"
+          class="form-control"
+          id="content"
+          name="content"
+          placeholder="https://www.bbc.com"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Collect words</button>
+    </form>
+  </div>
+
+  <div class="container">
+    {% if status and url%}
+    <h4>Search URL : {{url}}</h4>
+    <div class="alert alert-success" role="alert">
+      URL Parsed! Words Count Descending Order
+    </div>
+    {% for pair in word_agg %}
+    <p>{{pair[1]}}: {{pair[0]}}</p>
+    {% endfor %} {% elif not url %}
+    <p>Search a website!</p>
+    {% else %}
+    <h4>Search URL : {{url}}</h4>
+    <div class="alert alert-warning" role="alert">
+      No match found for website! See request error below:
+      {{word_agg[0].split(':')[1]}}
+    </div>
+    {% endif %} {% endblock %}
+  </div>
+</div>
